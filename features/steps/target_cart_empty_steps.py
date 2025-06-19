@@ -1,6 +1,9 @@
 from behave import given, when, then
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 @given('I open target.com')
 def open_main(context):
@@ -8,7 +11,8 @@ def open_main(context):
 
 @when('I click on cart icon')
 def click_cart_icon(context):
-    context.cart_icon = context.driver.find_element(By. CSS_SELECTOR, "[data-test='@web/CartIcon']").click()
+    cart_icon = WebDriverWait(context.driver, 10).until (EC.element_to_be_clickable((By. CSS_SELECTOR, "[data-test='@web/CartIcon']")) ).click()
+
 
 @then('I should see "Your cart is empty" message')
 def verify_message(context):
