@@ -5,4 +5,4 @@ Feature: Verify Sign In for logged out users
     Given I open target.com
     When I click on Account
     And I click on Sign in or create account from side navigation
-    Then I should see the "Enter your email or mobile number to continue" message
+    Then I should see the "Sign in or create account" message

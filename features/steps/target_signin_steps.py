@@ -5,24 +5,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+# ACCOUNT_BTN = (By.ID, 'account-sign-in')
+# SIGN_IN_SIDE_BTN = (By.XPATH, "//button[@data-test='accountNav-signIn']")
 @when('I click on Account')
 def click_account(context):
-    # context.driver.implicitly_wait(5)
-    account_button = WebDriverWait(context.driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "//a[@id='account-sign-in']"))
-    )
-    account_button.click()
-    # sleep(1)
+    context.app.header.click_account()
 
 @when('I click on Sign in or create account from side navigation')
 def click_sign_in_nav(context):
-    sign_in_link = WebDriverWait(context.driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "//button[@data-test='accountNav-signIn']"))
-    )
-    sign_in_link.click()
-    # sleep(2)
+    context.app.header.click_sign_in_from_nav()
 
-@then('I should see the "Enter your email or mobile number to continue" message')
+@then('I should see the "Sign in or create account" message')
 def verify_sign_in_message(context):
-    message = context.driver.find_element(By.XPATH, "//*[contains(text(), 'Enter your email or mobile number to continue')]")
-    assert "Enter your email or mobile number to continue" in message.text
+    context.app.login_page.verify_sign_in_message()
